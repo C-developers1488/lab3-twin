@@ -73,8 +73,7 @@ class SharedPtr{
     if (elemPointer != nullptr)
     {
       return true;
-    }else
-    {
+    }else{
       return false;
     }
   }
