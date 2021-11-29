@@ -5,17 +5,18 @@
 #include <iostream>
 #include <cstddef>
 #include <atomic>
+#include <utility>
 
 template <typename T>
 class SharedPtr{
+ public:
   std::atomic_size_t *refCounter = nullptr;
   T* elemPointer = nullptr;
- public:
   SharedPtr()
   {
     refCounter = new std::atomic_size_t(1);
   }
-  SharedPtr(T* ptr)
+  explicit SharedPtr(T* ptr)
   {
     elemPointer = ptr;
     refCounter = new std::atomic_size_t(1);
@@ -34,7 +35,7 @@ class SharedPtr{
     {
       return;
     }
-    if(--(*refCounter) == 0)
+    if (--(*refCounter) == 0)
     {
       delete refCounter;
       delete elemPointer;
@@ -42,7 +43,7 @@ class SharedPtr{
   }
   auto operator=(const SharedPtr& r) -> SharedPtr&
   {
-    if(this == &r)
+    if (this == &r)
     {
       return *this;
     }
@@ -54,7 +55,7 @@ class SharedPtr{
   }
   auto operator=(SharedPtr&& r) noexcept -> SharedPtr&
   {
-    if(this == &r)
+    if (this == &r)
     {
       return *this;
     }
@@ -69,11 +70,10 @@ class SharedPtr{
 
   operator bool() const
   {
-    if(elemPointer != nullptr)
+    if (elemPointer != nullptr)
     {
       return true;
-    }
-    else
+    }else
     {
       return false;
     }
