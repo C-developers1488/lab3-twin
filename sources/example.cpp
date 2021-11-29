@@ -1,8 +1,7 @@
-// Copyright 2021 Your Name <your_email>
+// Copyright 2021 C-developers1488
 
 #include <stdexcept>
 
-#include <example.hpp>
 
 auto example() -> void {
   throw std::runtime_error("not implemented");
