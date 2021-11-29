@@ -96,11 +96,3 @@ TEST(Shared_Ptr, Swap) {
   ASSERT_EQ(*q, "PTR");
   ASSERT_EQ(q.use_count(), 1);
 }
-TEST(Shared_Ptr, equal_ptr) {
-  SharedPtr<std::string> q(new std::string{"Scoped"});
-  ASSERT_EQ(*q, "Scoped");
-  ASSERT_EQ(q.use_count(), 1);
-  q = q;
-  ASSERT_EQ(*q, "Scoped");
-  ASSERT_EQ(q.use_count(), 1);
-}
